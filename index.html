@@ -47,7 +47,8 @@
                         <img src="img/grumpycat.jpg" class="card-img-top" alt="Grumpy Cat">
                         <div class="card-body">
                             <h5 class="card-title">Grumpy Cat</h5>
-                            <p class="card-text">Only looks grumpy, but actually sweet. RIP he had financial troubles.</p>
+                            <p class="card-text">Only looks grumpy, but actually sweet. RIP he had financial troubles.
+                            </p>
                             <button type="button" class="btn btn-secondary">RIP</button>
                         </div>
                     </div>
@@ -66,8 +67,8 @@
         </div>
 
         <!-- TODO: Implement Task 3 here -->
-         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingNameInput" placeholder="John Doe">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingNameInput" placeholder="John Doe" required>
             <label for="floatingNameInput">Name</label>
         </div>
         <div class="form-floating mb-3">
@@ -77,9 +78,54 @@
         <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label">Write your message here...</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
-            <button type="button" class="btn btn-success">Submit</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                data-bs-target="#reviewFormModal">Submit</button>
         </div>
-    </div>
+        <div class="modal fade" id="reviewFormModal" tabindex="-1" aria-labelledby="reviewFormModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="reviewFormModalLabel">Confirm Your Fields</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-start">
+                        <p class="mb-3">Please verify the details you entered are correct before final submission.</p>
+                        <div class="mb-2"><strong>Fields to be sent:</strong></div>
+                        <ul class="list-group">
+                            <li class="list-group-item"><strong>Name:</strong> <span id="modalNameText"></span></li>
+                            <li class="list-group-item"><strong>Email:</strong> <span id="modalEmailText"></span></li>
+                            <li class="list-group-item d-flex flex-column gap-1">
+                                <strong>Message:</strong>
+                                <textarea id="modalMessageText" class="form-control mt-1 p-2 bg-light border rounded"
+                                    rows="3" style="min-height: 80px; max-height: 300px; resize: vertical;"></textarea>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back to Edit</button>
+                        <button type="submit" class="btn btn-success">Confirm & Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
+        <script>
+            const reviewModalElement = document.getElementById('reviewFormModal');
+
+            reviewModalElement.addEventListener('show.bs.modal', function () {
+                const inputName = document.getElementById('floatingNameInput').value;
+                const inputEmail = document.getElementById('floatingInput').value;
+                const inputMessage = document.getElementById('exampleFormControlTextarea1').value;
+
+                document.getElementById('modalNameText').innerText = inputName || 'Empty';
+                document.getElementById('modalEmailText').innerText = inputEmail || 'Empty';
+                document.getElementById('modalMessageText').innerText = inputMessage || 'Empty';
+            });
+        </script>
 </body>
 
 </html>
